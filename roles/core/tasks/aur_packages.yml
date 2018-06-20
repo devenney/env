@@ -1,0 +1,4 @@
+---
+- name: Install AUR Packages
+  with_items: "{{ aur_packages }}"
+  command: "yay -S --noconfirm {{ item }}"

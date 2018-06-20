@@ -1,0 +1,6 @@
+---
+
+- include: "environment.yml"
+- include: "core_packages.yml"
+- include: "yay.yml"
+- include: "aur_packages.yml"

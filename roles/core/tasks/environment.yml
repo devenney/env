@@ -1,0 +1,8 @@
+---
+
+- name: Set Console Font
+  become: true
+  lineinfile:
+    dest: "/etc/vconsole.conf"
+    state: "present"
+    line: "FONT={{ console_font }}"

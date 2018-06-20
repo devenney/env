@@ -1,0 +1,12 @@
+---
+- name: Upgrade Packages
+  become: true
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install Core Packages
+  become: true
+  with_items: "{{ core_packages }}"
+  pacman:
+    name: "{{ item }}"

@@ -1,0 +1,12 @@
+---
+
+- name: Clone Repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { repo: 'https://github.com/VundleVim/Vundle.vim.git', dest: '~/.vim/bundle/Vundle.vim' }
+
+# TODO: Native plugin management.
+- name: Install Vundle Plugins
+  command: "vim -E -s -c 'source ~/.vimrc' -c PluginInstall -c qall"

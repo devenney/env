@@ -1,0 +1,28 @@
+---
+- name: Check if yay is installed
+  command: pacman -Q yay
+  register: "package_present"
+  with_items:
+   - "yay"
+  ignore_errors: true
+
+- name: Clone Source
+  git:
+    repo: "https://aur.archlinux.org/{{ item.item }}.git"
+    dest: "/tmp/yay"
+  with_items: "{{ package_present.results }}"
+  when: not item.rc == 0
+
+- name: Build and Install
+  command: makepkg -si --noconfirm
+  args:
+    chdir: "/tmp/yay"
+  with_items: "{{ package_present.results }}"
+  when: not item.rc == 0
+
+- name: Tidy Up
+  file:
+    state: absent
+    path: "/tmp/yay"
+  with_items: "{{ package_present.results }}"
+  when: not item.rc == 0

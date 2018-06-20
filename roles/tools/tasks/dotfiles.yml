@@ -1,0 +1,18 @@
+---
+
+- name: Clone Repositories
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { repo: 'https://github.com/devenney/dotfiles', dest: '~/.dotfiles' }
+
+- name: Symlink Dotfiles
+  file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  with_items:
+    - { src: '~/.dotfiles/.tmux.conf', dest: '~/.tmux.conf' }
+    - { src: '~/.dotfiles/.zshrc', dest: '~/.zshrc' }
+    - { src: '~/.dotfiles/.vimrc', dest: '~/.vimrc' }

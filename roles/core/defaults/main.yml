@@ -1,0 +1,12 @@
+console_font: ter-powerline-v16n
+
+aur_packages:
+  - powerline-console-fonts
+
+core_packages:
+  - base-devel
+  - git
+  - powerline
+  - tmux
+  - vim
+  - zsh
